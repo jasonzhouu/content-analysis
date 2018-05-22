@@ -8,18 +8,16 @@ import pandas as pd
 import numpy as np
 import jieba.analyse
 from sklearn.metrics.pairwise import cosine_similarity
-from Naked.toolshed.shell import execute_js
-
 
 if __name__ == '__main__':
     # initialize jieba
     jieba.analyse.set_stop_words("stopwords.txt")
 
-    my_engine = ContentEngine('localhost', 'root', 'xiaoyu2698355', 'rss')
+    my_engine = ContentEngine('localhost', 'root', 'root', 'rss')
 
     # read updated news from database
     now_date = datetime.datetime.now().strftime("%Y-%m-%d")
-    # 只对当天录入数据库的文章分析特征向量
+    # only analyse article get today
     sql = "SELECT id, title, content FROM articles WHERE created_at LIKE " + "'" + now_date + "%';"
     lines = my_engine.execute_sql(sql)
 
